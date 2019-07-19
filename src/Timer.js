@@ -10,7 +10,11 @@ class Timer extends Component {
     };
   }
 
-  //Your code here
+  componentDidUpdate() {
+    this.timer.current.style.color = '#FFF'
+    this.timer.current.style.width = 480+this.state.time*5/1000+"px"
+    this.timer.current.style.height = 300+this.state.time*5/1000+"px"
+  }
 
   componentDidMount() {
     this.interval = setInterval(
@@ -21,6 +25,13 @@ class Timer extends Component {
 
   componentWillUnmount() {
     clearInterval(this.interval);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+  if (this.state.time === nextState.time) {
+    return false
+  }
+  return true
   }
 
   render() {
